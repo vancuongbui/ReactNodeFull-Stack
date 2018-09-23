@@ -32,6 +32,7 @@ app.use(passport.session());
 // calling the app for authentication
 // authRoutes(app);
 require('./routes/authRoutes')(app);
+require('./routes/paymentRoutes')(app);
 
 const PORT = process.env.PORT || 8080;  //
 

@@ -11,15 +11,21 @@ module.exports = (app) => {
     }));
     
     // handle second route /auth/google/callback
-    app.get('/auth/google/callback', passport.authenticate('google'));
-    // app.get('/auth/google/callback', (req, res) => {
-    //     res.send("authentication success the first time");
-    // });
+    app.get(
+        '/auth/google/callback', 
+        passport.authenticate('google'),
+        (req, res) => {
+            // success, redirect user to the main page - surveys page in this prject
+            res.redirect('/surveys');
+        }
+    );
+    
 
     // logout route
     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send(req.user);
+        // res.send(req.user);
+        res.redirect('/');
     })
 
     // api/current_user route   - note that this is personal defined

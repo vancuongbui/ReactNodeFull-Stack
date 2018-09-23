@@ -13,4 +13,14 @@
 
 # [START gae_quickstart_yaml]
 runtime: nodejs8
+env: flex
+env_variables:
+  REACT_APP_GOOGLE_CLIENT_ID: "302032875463-atu6hk62hd6c5c7n57ljd6s1lic0dn3h.apps.googleusercontent.com"
+  REACT_APP_GOOGLE_CLIENT_SECRET: "qrJP72LeSJEH-eTbl0J2XKEM"
+  REACT_APP_MONGODB_URI: "mongodb://vancuongbui:Gaucon0501@ds111913.mlab.com:11913/reactwithnode"
+  REACT_APP_COOKIE_KEY: "fjalsdfkjlsjkjfksajqkreoiwjrlsajfdkhsoifsdkjfkshfjsdnfjdsbfisdj"
+  REACT_APP_STRIPE_PUBLIC_KEY: "pk_test_yMp9pKcznpRrci7EnKDpebsw"
+  REACT_APP_STRIPE_SECRET_KEY: "sk_test_8ZpkeqpjtcICbhLn9gjzx3gW"
+  
+#
 # [END gae_quickstart_yaml]

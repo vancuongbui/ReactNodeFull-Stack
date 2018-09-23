@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-export default class RightMenu extends Component {
+export default class LeftMenu extends Component {
   render() {
     return (
-        <div style={{ backgroundColor: '#222222', paddingBottom: 20, }}>
+        <div className="col s2" style={{ backgroundColor: '#444444', }}>
             <p style={itemStyle}>
                 <a href="" style={textStyle}>Menu Item 1</a>
             </p>   

@@ -1,29 +1,73 @@
 import React, { Component } from 'react'
-import logo from '../../static/images/logo/logo.svg';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Payment from '../common/Payment';
 
-export default class Header extends Component {
+const unAuthHeader = () => {
+  return (
+    <nav className="nav-extended" style={{ backgroundColor: '#c83349' }}>
+      <div className="nav-wrapper">
+        <Link to={'/'} className="brand-logo">Vndemy</Link>
+        {/* <a href="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a> */}
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li><a href="/auth/google">Login</a></li>
+          <li><a href="auth/google">Sign up</a></li>
+          <li><a href="/auth/google">Login with Goolge+</a></li>
+        </ul>
+      </div>
+    </nav>
+  )
+}
+
+const grantAuthHeader = () => {
+  return (
+    <nav className="nav-extended" style={{ backgroundColor: '#c83349' }}>
+      <div className="nav-wrapper">
+        <Link to={'/'} className="brand-logo">Vndemy</Link>
+        {/* <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a> */}
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li><a href="/api/logout">Logout</a></li>
+        </ul>
+      </div>
+      <div className="nav-content">
+        <ul className="tabs tabs-transparent">
+          <li className="tab"><a href="/">Home</a></li>          
+          <li className="tab disabled"><a href="/surveys">Surveys</a></li>
+          <li className="tab"><a href="surveys/new">Surveys New</a></li>
+          <li className="tab"><Payment /></li>
+        </ul>
+      </div>
+    </nav>
+  )
+}
+
+class Header extends Component {
+  renderHeader = () => {
+    switch (this.props.authState) {
+      case null:
+        return unAuthHeader();
+      case false:
+        return unAuthHeader();
+      default:
+        return grantAuthHeader();
+
+    }
+  }
+  
   render() {
     return (
-        <header className="d-flex flex-row App-header">
-          <div className="d-flex flex-md-col col-md-10">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="d-flex align-content-center App-title">Welcome to Vndemy</h1>
-          </div>
-          <div className="d-flex flex-row col-md-2" >
-            <div className="col-xs-6 p-2">
-              <button className="btn btn-secondary">
-                <a href="/auth/google" style={{ color: '#fff', }}>Login</a>
-              </button>
-            </div>
-            
-            <div className="col-xs-6 p-2">
-              <button className="btn btn-secondary">
-                <a href="/auth/google" style={{ color: '#fff', }}>Sgin up</a>
-              </button>
-            </div>
-          </div>
-          
-        </header>
+      <div>
+        {this.renderHeader()}
+      </div>
     )
   }
 }
+// function map State to props
+const mapStateToProps = state => {
+  console.log(state.authState.currentUser);
+  return {
+    authState: state.authState.currentUser,
+  }
+}
+
+export default connect(mapStateToProps, {})(Header);

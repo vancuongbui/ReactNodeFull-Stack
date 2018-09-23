@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 // import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default class Aside extends Component {
   render() {
     return (
         <div 
-            style={{ backgroundColor: '#222222', paddingBottom: 20, }} 
-            className="d-flex flex-column justify-content-end align-content-start"            
+            style={{ backgroundColor: '#444444'}} 
+            className="col s2"            
         >
             <p style={itemStyle}>
                 <a href="" style={textStyle}>Aside Item 1</a>

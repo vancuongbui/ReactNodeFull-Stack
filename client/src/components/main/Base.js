@@ -1,27 +1,23 @@
 import React, { Component } from 'react'
 import Header from '../menu/Header';
 import Aside from '../menu/Aside';
-import RightMenu from '../menu/RightMenu';
+import LeftMenu from '../menu/LeftMenu';
+import Footer from '../menu/Footer';
 
 
 export default class Base extends Component {
   render() {
     return (
-      <div>
+      <div style={{ backgroundColor: '#444444', margin: 0, }}>
         <Header />
-        <div className="d-flex flex-xl-row">
-          <div className="col-md-2 p-4">
-            <RightMenu />
+        <div className="row" style={{ marginTop: 0, marginBottom: 0, }}>
+          <LeftMenu />
+          <div className="col s8" style={{ backgroundColor: '#333333' }}>  
+            {this.props.mainComponent}   
           </div>
-          <div className="col-md-8 p-4 flex-grow-1">            
-            <div style={{ backgroundColor: '#444444', paddingBottom: 20, }}>
-                {this.props.mainComponent}   
-            </div>
-          </div>
-          <div className="col-md-2 p-4">
-            <Aside />
-          </div>       
+          <Aside />     
         </div>
+        <Footer />
       </div>
     )
   }
