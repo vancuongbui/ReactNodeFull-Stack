@@ -28,18 +28,23 @@ passport.use(new GoogleStrategy({
     callbackURL: '/auth/google/callback',       //problem with https since it return http
     proxy: true,                                //solve the https http problem
     }, 
-    async (accessToken, refreshToken, profile, done) => {
+    (accessToken, refreshToken, profile, done) => {
         // find the first collection with googleId match profile.id, it will return promise
-        const existingUser = await User.findOne({
+        User.findOne({
             googleId: profile.id,
+        }).then((existingUser) => {
+            if (existingUser) {
+                // already have this user
+                done(null, existingUser)
+            } else {
+                // we need to save the new user
+                //create new instance of User with the profile from googleStrategy
+                new User({
+                    googleId: profile.id,
+                }).save()   //save to the mongo database with save() - check on mlab.com where database was created
+                    .then(user => done(null, user));
+            }   
         })
-        if (existingUser) {
-            // already have this user
-            return done(null, existingUser)
-        } 
-        // we need to save the new user by create new instance of User with the profile from googleStrategy
-        const user = await new User({ googleId: profile.id }).save()
-        //save to the mongo database with save() - check on mlab.com where database was created   
-        done(null, user);    
+    
     })
 ); //need 2 factors: client ID and client secret

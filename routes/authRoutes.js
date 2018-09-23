@@ -3,7 +3,7 @@ const passport = require('passport');
 
 module.exports = (app) => {
     app.get('/', (req, res) => {
-        res.send('Hello, I just want to see this line');
+        res.send('Hello, I just want to see this very new line');
     })
     app.get('/auth/google', passport.authenticate('google', {
         scope: ['profile', 'email'],
@@ -12,6 +12,9 @@ module.exports = (app) => {
     
     // handle second route /auth/google/callback
     app.get('/auth/google/callback', passport.authenticate('google'));
+    // app.get('/auth/google/callback', (req, res) => {
+    //     res.send("authentication success the first time");
+    // });
 
     // logout route
     app.get('/api/logout', (req, res) => {
